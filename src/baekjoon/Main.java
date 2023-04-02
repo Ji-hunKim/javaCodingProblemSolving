@@ -6,22 +6,26 @@ class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt() ;
+        int begin = sc.nextInt();
+        int end = sc.nextInt();
 
+        int num = 1;
+        int idx = 0;
+        int answer = 0;
 
-        if(num == 0 || num == 1) System.out.println(num);
-        else{
-            int dp[] = new int[num+1];
-
-            dp[0] = 0;
-            dp[1] = 1;
-
-            for(int i=2; i<num+1; i++){
-                dp[i] = dp[i-1] + dp[i-2];
+        Loop1:
+        while(true){
+            for(int i=1; i<num+1; i++){
+                idx++;
+                if(idx >= begin && idx <= end) {
+                    answer += num;
+                }
+                if(idx > end) break Loop1;
             }
 
-            System.out.println(dp[num]);
+            num++;
         }
 
+        System.out.println(answer);
     }
 }
