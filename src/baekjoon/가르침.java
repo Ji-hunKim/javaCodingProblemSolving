@@ -1,8 +1,8 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
 
-class Main {
+public class 가르침 {
     static int N,K;
     static int max = 0;
     static boolean visit[] = new boolean[26];
