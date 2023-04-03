@@ -1,8 +1,7 @@
 package baekjoon;
-
 import java.util.*;
 
-class Main {
+class 괄호의값 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String in = scanner.next();
