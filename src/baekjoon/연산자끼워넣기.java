@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-class Main {
+public class 연산자끼워넣기 {
 
     static int maxVal = Integer.MIN_VALUE;
     static int minVal = Integer.MAX_VALUE;
