@@ -1,8 +1,8 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
 
-class Main {
+public class 부분합 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
