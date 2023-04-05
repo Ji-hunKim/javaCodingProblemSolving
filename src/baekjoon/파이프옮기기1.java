@@ -1,8 +1,8 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
 
-class Main {
+public class 파이프옮기기1 {
     static int N;
     static int[][] map;
     static int answer = 0;
