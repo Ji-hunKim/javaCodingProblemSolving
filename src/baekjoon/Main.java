@@ -4,47 +4,103 @@ import java.util.*;
 
 class Main {
     static int N;
-    static int[][] map;
+    static String[][] map;
     static int answer = 0;
+
+    static int maxVal = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         N = sc.nextInt();
 
-        map = new int[N][N];
+        map = new String[N][N];
+
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                map[i][j] = sc.nextInt();
+            map[i] = sc.next().split("");
+        }
+
+        String temp = "";
+        int cnt = 0;
+        String cur = "";
+
+        //가로
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N - 1; j++) {
+                temp = map[i][j];
+                map[i][j] = map[i][j + 1];
+                map[i][j + 1] = temp;
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[a][0];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[a][b])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[a][b];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
+                }
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[0][a];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[b][a])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[b][a];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
+                }
+                map[i][j + 1] = map[i][j];
+                map[i][j] = temp;
             }
         }
 
-        dfs(0, 1, 1);
-        System.out.println(answer);
-    }
-
-    public static void dfs(int x, int y, int i) {
-
-        if (x == N - 1 && y == N - 1) {
-            answer++;
-            return;
+        //세로
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N - 1; j++) {
+                temp = map[j][i];
+                map[j][i] = map[j + 1][i];
+                map[j + 1][i] = temp;
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[a][0];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[a][b])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[a][b];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
+                }
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[0][a];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[b][a])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[b][a];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
+                }
+                map[j + 1][i] = map[j][i];
+                map[j][i] = temp;
+            }
         }
-        if (i == 1) {
-            // 가로
-            if (y + 1 < N && map[x][y + 1] == 0) dfs(x, y + 1, 1);
-            if (x + 1 < N && y + 1 < N && map[x][y + 1] == 0 && map[x + 1][y + 1] == 0 && map[x + 1][y] == 0)
-                dfs(x + 1, y + 1, 2);
-        } else if (i == 2) {
-            // 대각선
-            if (y + 1 < N && map[x][y + 1] == 0) dfs(x, y + 1, 1);
-            if (x + 1 < N && y + 1 < N && map[x][y + 1] == 0 && map[x + 1][y + 1] == 0 && map[x + 1][y] == 0)
-                dfs(x + 1, y + 1, 2);
-            if (x + 1 < N && map[x + 1][y] == 0) dfs(x + 1, y, 3);
-        } else if (i == 3) {
-            // 세로
-            if (x + 1 < N && y + 1 < N && map[x][y + 1] == 0 && map[x + 1][y + 1] == 0 && map[x + 1][y] == 0)
-                dfs(x + 1, y + 1, 2);
-            if (x + 1 < N && map[x + 1][y] == 0) dfs(x + 1, y, 3);
-        }
+        System.out.println(maxVal);
     }
 }
