@@ -1,9 +1,13 @@
 package baekjoon;
 
-import java.util.*;
-public class Main {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class 최소비용구하기 {
     static int n, m;
-    static ArrayList<Node>[] list;
+    static ArrayList<baekjoon.Node>[] list;
     static int dist[];
     static boolean visited[];
 
@@ -26,7 +30,7 @@ public class Main {
             int start = sc.nextInt();
             int end = sc.nextInt();
             int w = sc.nextInt();
-            list[start].add(new Node(end, w));
+            list[start].add(new baekjoon.Node(end, w));
         }
 
         int start_city = sc.nextInt();
@@ -39,23 +43,23 @@ public class Main {
     }
 
     public static void djikstra(int start_city) {
-        PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.add(new Node(start_city, 0));
+        PriorityQueue<baekjoon.Node> pq = new PriorityQueue<>();
+        pq.add(new baekjoon.Node(start_city, 0));
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[start_city] = 0;
 
         while (!pq.isEmpty()) {
-            Node cur = pq.poll();
+            baekjoon.Node cur = pq.poll();
 
             visited[cur.city] = true;
 
-            for (Node next : list[cur.city]) {
+            for (baekjoon.Node next : list[cur.city]) {
                 if (visited[next.city]) {
                     continue;
                 }
                 if (dist[next.city] > dist[cur.city] + next.w) {
                     dist[next.city] = dist[cur.city] + next.w;
-                    pq.add(new Node(next.city, dist[next.city]));
+                    pq.add(new baekjoon.Node(next.city, dist[next.city]));
                 }
 
             }
@@ -64,7 +68,7 @@ public class Main {
     }
 }
 
-class Node implements Comparable<Node> {
+class Node implements Comparable<baekjoon.Node> {
     int city, w;
 
     Node(int city, int w) {
@@ -72,8 +76,7 @@ class Node implements Comparable<Node> {
         this.w = w;
     }
 
-    public int compareTo(Node o) {
+    public int compareTo(baekjoon.Node o) {
         return this.w - o.w;
     }
 }
-
