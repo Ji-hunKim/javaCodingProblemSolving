@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.io.IOException;
 import java.util.*;
-public class Main {
+public class 전쟁전투 {
     static int N,M;
     static char[][] map;
     static boolean[][] visited;
