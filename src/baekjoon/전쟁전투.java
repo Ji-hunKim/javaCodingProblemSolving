@@ -31,11 +31,11 @@ public class 전쟁전투 {
             for(int j=0; j<N; j++){
                 if(!visited[i][j] && map[i][j] == 'W'){
                     dfs(i,j,'W');
+                    wVal += cnt*cnt;
                 }else if(!visited[i][j] && map[i][j] == 'B'){
                     dfs(i,j,'B');
+                    bVal += cnt*cnt;
                 }
-                if(map[i][j] == 'W') wVal += cnt*cnt;
-                else bVal += cnt*cnt;
                 cnt = 0;
             }
         }
