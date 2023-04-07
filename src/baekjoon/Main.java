@@ -1,79 +1,68 @@
 package baekjoon;
 
+import java.io.IOException;
 import java.util.*;
 public class Main {
-    static int n, m;
-    static ArrayList<Node>[] list;
-    static int dist[];
-    static boolean visited[];
+    //함수에서 사용할 변수들
+    static int[][] link; //간선 연결상태
+    static boolean[] visited; //확인 여부
+    static int V; //정점개수
+    static int E; //간선개수
+    static int start; //시작정점
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+        V = sc.nextInt();
+        E = sc.nextInt();
+        start = sc.nextInt();
 
+        link = new int[1001][1001]; //좌표를 그대로 받아들이기 위해 +1해서 선언
+        visited = new boolean[1001]; //초기값 False
 
-        n = sc.nextInt();
-        m = sc.nextInt();
+        //간선 연결상태 저장
+        for(int i = 0; i < E; i++) {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
 
-
-        list = new ArrayList[n + 1];
-        visited = new boolean[n + 1];
-        dist = new int[n + 1];
-        for (int i = 1; i <= n; i++) {
-            list[i] = new ArrayList<>();
+            link[x][y] = link[y][x] = 1;
         }
 
-        for (int i = 0; i < m; i++) {
-            int start = sc.nextInt();
-            int end = sc.nextInt();
-            int w = sc.nextInt();
-            list[start].add(new Node(end, w));
-        }
+        dfs(start); //dfs호출
 
-        int start_city = sc.nextInt();
-        int end_city = sc.nextInt();
+        visited = new boolean[1001]; //확인상태 초기화
+        System.out.println(); //줄바꿈
 
-
-        djikstra(start_city);
-
-        System.out.println(dist[end_city]);
+        bfs(); //bfs호출
     }
 
-    public static void djikstra(int start_city) {
-        PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.add(new Node(start_city, 0));
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[start_city] = 0;
+    //시작점을 변수로 받아 확인, 출력 후 다음 연결점을 찾아 시작점을 변경하여 재호출
+    public static void dfs(int cur) {
+        visited[cur] = true;
+        System.out.print(cur + " ");
 
-        while (!pq.isEmpty()) {
-            Node cur = pq.poll();
-
-            visited[cur.city] = true;
-
-            for (Node next : list[cur.city]) {
-                if (visited[next.city]) {
-                    continue;
-                }
-                if (dist[next.city] > dist[cur.city] + next.w) {
-                    dist[next.city] = dist[cur.city] + next.w;
-                    pq.add(new Node(next.city, dist[next.city]));
-                }
-
+        for(int j = 1; j <= V; j++) {
+            if(link[cur][j] == 1 && !visited[j]) {
+                dfs(j);
             }
         }
+    }
 
+    public static void bfs() {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.offer(start);
+        visited[start] = true;
+        System.out.print(start + " ");
+
+        while(!queue.isEmpty()) {
+            int cur = queue.poll();
+
+            for(int j = 1; j <= V; j++) {
+                if(link[cur][j] == 1 && !visited[j]) {
+                    queue.offer(j);
+                    visited[j] = true;
+                    System.out.print(j + " ");
+                }
+            }
+        }
     }
 }
-
-class Node implements Comparable<Node> {
-    int city, w;
-
-    Node(int city, int w) {
-        this.city = city;
-        this.w = w;
-    }
-
-    public int compareTo(Node o) {
-        return this.w - o.w;
-    }
-}
-
