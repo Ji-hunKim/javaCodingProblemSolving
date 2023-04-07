@@ -1,9 +1,9 @@
 package baekjoon;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
+public class 퇴사2 {
     static int[] t;
     static int[] p;
     static int[] dp;
