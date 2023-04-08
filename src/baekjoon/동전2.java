@@ -3,7 +3,7 @@ package baekjoon;
 import java.io.IOException;
 import java.util.*;
 
-public class Main {
+public class 동전2 {
     static int N;
     static int sum;
     static int[] coins;
