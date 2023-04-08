@@ -3,7 +3,7 @@ package baekjoon;
 import java.io.IOException;
 import java.util.*;
 
-public class Main {
+public class 단지번호붙이기 {
     static int N;
     static int[][] map;
     static int[] dx = {0,0,1,-1};
