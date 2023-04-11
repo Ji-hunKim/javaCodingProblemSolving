@@ -1,9 +1,9 @@
 package baekjoon;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
+public class 음식물피하기 {
     static int N, M;
     static int K;
     static int[][] maps;
