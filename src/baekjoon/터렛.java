@@ -2,7 +2,8 @@ package baekjoon;
 
 import java.util.Scanner;
 
-public class Main {
+public class 터렛 {
+
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
