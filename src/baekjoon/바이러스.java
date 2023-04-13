@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.Scanner;
 
-public class Main {
+public class 바이러스 {
     static int N,K;
     static int[][] inArr;
     static int[][] maps;
