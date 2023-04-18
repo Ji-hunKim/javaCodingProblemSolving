@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class 숨바꼭질2 {
     static int N,K;
     static int cnt;
     static int[] visited = new int[100005];
