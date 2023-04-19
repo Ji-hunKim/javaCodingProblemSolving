@@ -1,8 +1,10 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
-public class Main {
+public class 숨바꼭질3 {
     static int N,K;
     static int count;
     static int[] min = new int[100001];
