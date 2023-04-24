@@ -2,9 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
-
-
+public class comparator {
     public static void main(String[] args) {
         HashMap<Integer, Integer> hm = new HashMap<>();
 
@@ -29,6 +27,4 @@ public class Main {
 
         System.out.println(hmList.get(0).getKey());
     }
-
-
 }
