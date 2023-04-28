@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class 가장가까운공통조상 {
     static int T;
     static List<int[]> map;
     static int N;
@@ -35,7 +35,7 @@ public class Main {
             Loop1:
             for(int i=0; i<listA.size(); i++){
                 for(int j=0; j<listB.size(); j++){
-                    if(Objects.equals(listA.get(i), listB.get(j))){
+                    if(listA.get(i) == listB.get(j)){
                         result[t] = listA.get(i);
                         break Loop1;
                     }
