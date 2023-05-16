@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class 이모티콘 {
 
     static boolean[][] visited = new boolean[1001][1001];//[clipboard][total]
 
@@ -39,7 +39,7 @@ public class Main {
             q.offer(new int[]{total, total, time + 1});
 
 
-            // 2. 클립보드에 있는 이모티콘 붙여넣기. 
+            // 2. 클립보드에 있는 이모티콘 붙여넣기.
             // 클립보드 비어있지 않아야하고, 붙여넣은 후 개수가 총 개수보다 적어야 하며, 이전에 방문한적 없어야함.
             if(clipboard != 0 && total + clipboard <= s && !visited[clipboard][total + clipboard]) {
                 q.offer(new int[]{clipboard, total + clipboard, time + 1});
