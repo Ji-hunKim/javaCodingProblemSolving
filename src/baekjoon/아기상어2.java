@@ -1,21 +1,10 @@
 package baekjoon;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-class Shark{
-    int x;
-    int y;
-    public Shark(int x, int y) {
-        super();
-        this.x = x;
-        this.y = y;
-    }
-}
-
-public class Main {
+public class 아기상어2 {
     static int n,m;
     static int xpos[]= {0,0,1,-1,1,1,-1,-1};
     static int ypos[]= {1,-1,0,0,1,-1,-1,1};
@@ -66,5 +55,14 @@ public class Main {
             }
         }
         System.out.println(answer);
+    }
+    class Shark{
+        int x;
+        int y;
+        public Shark(int x, int y) {
+            super();
+            this.x = x;
+            this.y = y;
+        }
     }
 }
