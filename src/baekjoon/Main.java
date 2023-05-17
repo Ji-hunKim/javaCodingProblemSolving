@@ -5,16 +5,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-class Shark{
-    int x;
-    int y;
-    public Shark(int x, int y) {
-        super();
-        this.x = x;
-        this.y = y;
-    }
-}
-
 public class Main {
     static int n,m;
     static int xpos[]= {0,0,1,-1,1,1,-1,-1};
@@ -23,48 +13,32 @@ public class Main {
     static int[][] dis;
 
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
+        String time1 = "12:10";
+        String time2 = "9:10";
+        String plus = "30";
 
-        n=sc.nextInt();
-        m=sc.nextInt();
+        System.out.println(toInt(time1));
+        System.out.println(timeAdd(time2, plus));
 
-        map=new int[n][m];
-        dis=new int[n][m];
+    }
+    public static int toInt(String t){
+        return Integer.parseInt(t.replace(":", ""));
+    }
 
-        Queue<Shark> q=new LinkedList<Shark>();
+    public static String timeAdd(String t, String plus){
+        int idx = t.indexOf(":");
+        int h = Integer.parseInt(t.substring(0,idx));
+        int m = Integer.parseInt(t.substring(idx+1));
+        int p = Integer.parseInt(plus);
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                map[i][j]=sc.nextInt();
-                if(map[i][j]==1) {
-                    q.add(new Shark(i,j));
-                }
-            }
+        if(m+p >= 60){
+            h++;
+            m = m-60;
         }
-        int answer=Integer.MIN_VALUE;
-
-        while(q.size()!=0) {
-            Shark cur = q.poll();
-
-            int x = cur.x;
-            int y = cur.y;
-
-            for (int j = 0; j < 8; j++) {
-                int nx = x + xpos[j];
-                int ny = y + ypos[j];
-
-                if(nx < 0 || ny < 0 || nx >= n || ny >= m)continue;
-
-                // 방문기록 있거나 상어인 경우 continue
-                if(dis[nx][ny] != 0 || map[nx][ny] == 1) continue;
-
-                dis[nx][ny] = dis[x][y] + 1;
-
-                if(dis[nx][ny] > answer) answer = dis[nx][ny];
-
-                q.add(new Shark(nx,ny));
-            }
+        if(h == 0){
+            return "00" + ":" + String.valueOf(m);
         }
-        System.out.println(answer);
+
+        return String.valueOf(h) + ":" + String.valueOf(m);
     }
 }
