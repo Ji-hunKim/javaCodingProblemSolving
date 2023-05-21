@@ -11,7 +11,6 @@ public class Main {
     static int ypos[]= {1,-1,0,0,1,-1,-1,1};
     static int[][] map;
     static int[][] dis;
-
     public static void main(String[] args) {
         String time1 = "12:10";
         String time2 = "9:10";
