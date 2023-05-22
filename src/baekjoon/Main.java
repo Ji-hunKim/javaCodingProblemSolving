@@ -1,77 +1,77 @@
 package baekjoon;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    static int T;
-    static int n,m;
-    static int K;
-
-    static int[][] map;
-    static boolean[][] visited;
-    static int baechoo;
-
-    static int[] dx = {0,0,1,-1};
-    static int[] dy = {1,-1,0,0};
-
-    static int answer;
+    static String str;
+    static String[] strArr = {"AAAA", "BB"};
+    static boolean ch;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        str = sc.next();
+        int n = 0;
 
-        T = sc.nextInt();
+        List<Integer> li = new ArrayList<>();
 
-        for(int t=0; t<T; t++){
-            answer = 0;
-
-            m = sc.nextInt();
-            n = sc.nextInt();
-            baechoo = sc.nextInt();
-
-            map = new int[n][m];
-            visited = new boolean[n][m];
-
-            int first,two;
-            for(int b=0; b<baechoo; b++){
-                two = sc.nextInt();
-                first = sc.nextInt();
-                map[first][two] = 1;
+        for(int i=0; i<str.length(); i++){
+            if(str.charAt(i) == '.'){
+                if(n != 0){
+                    if(n % 2 == 1){
+                        ch = true;
+                        break;
+                    }
+                    li.add(n);
+                    n = 0;
+                }
+            }else{
+                n++;
             }
+        }
 
-            for(int i=0; i<n; i++){
-                for(int j=0; j<m; j++){
-                    if(map[i][j] == 1 && !visited[i][j]){
-                        dfs(i,j);
-                        answer++;
+        if(n>=0) {
+            if(n % 2 == 0){
+                li.add(n);
+            }else{
+                ch = true;
+            }
+        }
+
+        int idx = 0;
+        boolean letterCheck = false;
+
+        String answer = "";
+        int cur = 0;
+
+
+
+        for(int i=0; i<str.length(); i++){
+            if(ch) break;
+
+            if(str.charAt(i) == '.'){
+                answer += '.';
+                if(letterCheck){
+                   idx++;
+                   letterCheck = false;
+                }
+            }else{
+                letterCheck = true;
+                cur = li.get(idx);
+                i += cur-1;
+                while(cur>0){
+                    if(cur >= 4){
+                        answer += strArr[0];
+                        cur -= 4;
+                    }else{
+                        answer += strArr[1];
+                        cur -= 2;
                     }
                 }
             }
-            System.out.println(answer);
         }
 
-
-    }
-
-    public static void dfs(int x, int y){
-        visited[x][y] = true;
-
-        int nx;
-        int ny;
-
-        for(int i=0; i<4; i++){
-            nx = x + dx[i];
-            ny = y + dy[i];
-
-            if(nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-
-            if(map[nx][ny] == 0 || visited[nx][ny]) continue;
-
-            visited[nx][ny] = true;
-            dfs(nx, ny);
-        }
+        if(ch) System.out.println(-1);
+        else System.out.println(answer);
     }
 
 }
