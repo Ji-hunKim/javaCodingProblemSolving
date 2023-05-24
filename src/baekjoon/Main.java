@@ -3,75 +3,62 @@ package baekjoon;
 import java.util.*;
 
 public class Main {
-    static String str;
-    static String[] strArr = {"AAAA", "BB"};
-    static boolean ch;
+    static int N;
+    static int S,T;
+    static int cnt = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        str = sc.next();
-        int n = 0;
+        List<ArrayList<Integer>> li = new ArrayList<>();
+        N = sc.nextInt();
 
-        List<Integer> li = new ArrayList<>();
+        for(int i=0; i<N; i++) {
 
-        for(int i=0; i<str.length(); i++){
-            if(str.charAt(i) == '.'){
-                if(n != 0){
-                    if(n % 2 == 1){
-                        ch = true;
+            S = sc.nextInt();
+            T = sc.nextInt();
+
+            if(i == 0){
+                ArrayList<Integer> temp = new ArrayList<>();
+                for(int k=S; k<T; k++){
+                    temp.add(k);
+                }
+                cnt++;
+                li.add(temp);
+                continue;
+            }
+
+            boolean timech = false;
+            int idx = 0;
+
+            for(int j=0; j<li.size(); j++){
+                ArrayList<Integer> temp = li.get(j);
+                for(int k=S; k<T; k++){
+                    if(temp.contains(k)){
+                        break;
+                    }else{
+                        timech = true;
+                        idx = j;
                         break;
                     }
-                    li.add(n);
-                    n = 0;
                 }
-            }else{
-                n++;
             }
-        }
 
-        if(n>=0) {
-            if(n % 2 == 0){
-                li.add(n);
-            }else{
-                ch = true;
-            }
-        }
-
-        int idx = 0;
-        boolean letterCheck = false;
-
-        String answer = "";
-        int cur = 0;
-
-
-
-        for(int i=0; i<str.length(); i++){
-            if(ch) break;
-
-            if(str.charAt(i) == '.'){
-                answer += '.';
-                if(letterCheck){
-                   idx++;
-                   letterCheck = false;
-                }
-            }else{
-                letterCheck = true;
-                cur = li.get(idx);
-                i += cur-1;
-                while(cur>0){
-                    if(cur >= 4){
-                        answer += strArr[0];
-                        cur -= 4;
-                    }else{
-                        answer += strArr[1];
-                        cur -= 2;
+            if(timech){
+                for(int k=S; k<T; k++){
+                    if(!li.get(idx).contains(k)){
+                        li.get(idx).add(k);
                     }
                 }
+            }else{
+                ArrayList<Integer> temp = new ArrayList<>();
+                for(int k=S; k<T; k++){
+                    temp.add(k);
+                }
+                cnt++;
+                li.add(temp);
             }
+
         }
-
-        if(ch) System.out.println(-1);
-        else System.out.println(answer);
+        System.out.println(cnt);
     }
-
 }
