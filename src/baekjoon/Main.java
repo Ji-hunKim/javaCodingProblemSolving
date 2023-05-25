@@ -4,60 +4,46 @@ import java.util.*;
 
 public class Main {
     static int N;
-    static int S,T;
     static int cnt = 0;
+    static int arr[][];
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<ArrayList<Integer>> li = new ArrayList<>();
         N = sc.nextInt();
 
-        for(int i=0; i<N; i++) {
+        arr = new int[N][2];
 
-            S = sc.nextInt();
-            T = sc.nextInt();
+        for (int i = 0; i < N; i++) {
+            arr[i][0] = sc.nextInt();
+            arr[i][1] = sc.nextInt();
+        }
 
-            if(i == 0){
-                ArrayList<Integer> temp = new ArrayList<>();
-                for(int k=S; k<T; k++){
-                    temp.add(k);
-                }
+        Arrays.sort(arr, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] obj1, int[] obj2) {
+                if(obj1[0] == obj2[0]) return obj1[1] - obj2[1];
+                else return obj1[0]-obj2[0];
+            }
+        });
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.offer(arr[0][1]);
+        cnt++;
+
+        int now;
+        int next;
+        int nextEnd;
+        for(int i=1; i<arr.length; i++){
+            now = pq.poll();
+            next = arr[i][0];
+            nextEnd = arr[i][1];
+
+            if(next < now) {
+                pq.add(now);
                 cnt++;
-                li.add(temp);
-                continue;
             }
 
-            boolean timech = false;
-            int idx = 0;
-
-            for(int j=0; j<li.size(); j++){
-                ArrayList<Integer> temp = li.get(j);
-                for(int k=S; k<T; k++){
-                    if(temp.contains(k)){
-                        break;
-                    }else{
-                        timech = true;
-                        idx = j;
-                        break;
-                    }
-                }
-            }
-
-            if(timech){
-                for(int k=S; k<T; k++){
-                    if(!li.get(idx).contains(k)){
-                        li.get(idx).add(k);
-                    }
-                }
-            }else{
-                ArrayList<Integer> temp = new ArrayList<>();
-                for(int k=S; k<T; k++){
-                    temp.add(k);
-                }
-                cnt++;
-                li.add(temp);
-            }
-
+            pq.add(nextEnd);
         }
         System.out.println(cnt);
     }
