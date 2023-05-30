@@ -3,48 +3,36 @@ package baekjoon;
 import java.util.*;
 
 public class Main {
-    static int N;
-    static int cnt = 0;
-    static int arr[][];
+    static int N, K;
+    static int arr[];
+    static int answer = 1000000000;
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
 
-        arr = new int[N][2];
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int answer = 0;
+        ArrayList<Integer> tall = new ArrayList<>();
+        ArrayList<Integer> subTall = new ArrayList<>();
 
-        for (int i = 0; i < N; i++) {
-            arr[i][0] = sc.nextInt();
-            arr[i][1] = sc.nextInt();
+        //키 입력받기
+        for(int i = 0; i<N; i++){
+            tall.add(sc.nextInt());
         }
-
-        Arrays.sort(arr, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] obj1, int[] obj2) {
-                if(obj1[0] == obj2[0]) return obj1[1] - obj2[1];
-                else return obj1[0]-obj2[0];
-            }
-        });
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        pq.offer(arr[0][1]);
-        cnt++;
-
-        int now;
-        int next;
-        int nextEnd;
-        for(int i=1; i<arr.length; i++){
-            now = pq.poll();
-            next = arr[i][0];
-            nextEnd = arr[i][1];
-
-            if(next < now) {
-                pq.add(now);
-                cnt++;
-            }
-
-            pq.add(nextEnd);
+        //키 차이 구하기
+        for(int i = 0; i < N-1; i++){
+            subTall.add(tall.get(i+1) - tall.get(i));
         }
-        System.out.println(cnt);
+        //키 차이 오름차순 정렬
+        Collections.sort(subTall);
+
+        //가장 큰 키차이를 K-1개 제외하고 나머지들 더함
+        for(int i = 0; i < N-K; i++){
+            answer += subTall.get(i);
+        }
+        System.out.println(answer);
     }
+
 }
