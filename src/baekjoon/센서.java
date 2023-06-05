@@ -1,8 +1,12 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
-public class Main {
+public class 센서 {
+
     static int N,K;
     static int cnt;
 
