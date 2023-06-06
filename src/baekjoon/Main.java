@@ -3,45 +3,47 @@ package baekjoon;
 import java.util.*;
 
 public class Main {
-    static int N,K;
-    static int cnt;
-
-
-    public static void main(String[] args) {
+    static int N,M;
+    static ArrayList<Integer> crane;
+    static ArrayList<Integer> box;
+    public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(System.in);
 
         N = sc.nextInt();
-        K = sc.nextInt();
+        crane = new ArrayList<>();
+        for(int i=0; i<N; i++) {
+            crane.add(sc.nextInt());
+        }
 
-        List<Integer> arr = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        int now;
+        M = sc.nextInt();
+        box = new ArrayList<>();
+        for(int i=0; i<M; i++) {
+            box.add(sc.nextInt());
+        }
 
-        for(int i=0; i<N; i++){
-            now = sc.nextInt();
-            if(arr.contains(now)){
-                continue;
-            }else{
-                arr.add(now);
+        Collections.sort(crane, Collections.reverseOrder());
+        Collections.sort(box, Collections.reverseOrder());
+
+        if(box.get(0) > crane.get(0)) {
+            System.out.println(-1);
+            return;
+        }
+
+        int ans = 0;
+
+        while(!box.isEmpty()) {
+            int bidx =0;
+            for(int i=0; i< N; ) {
+                if(bidx == box.size()) break;
+                else if(crane.get(i) >= box.get(bidx)) {
+                    box.remove(bidx);
+                    i++;
+                }else bidx++;
             }
-
+            ans++;
         }
 
-        Collections.sort(arr);
+        System.out.println(ans);
 
-        int len = arr.size();
-        int a;
-        for(int i=1; i<len; i++){
-            a = arr.get(i) - arr.get(i-1);
-            temp.add(a);
-        }
-
-        Collections.sort(temp);
-
-        for(int i=0; i<len-K; i++){
-            cnt += temp.get(i);
-        }
-        System.out.println(cnt);
     }
-
 }
