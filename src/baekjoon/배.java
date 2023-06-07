@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class 배 {
-=
+
         static int N,M;
         static ArrayList<Integer> crane;
         static ArrayList<Integer> box;

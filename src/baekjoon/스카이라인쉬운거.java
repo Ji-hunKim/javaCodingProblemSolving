@@ -1,8 +1,10 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
+import java.util.Stack;
 
-public class Main {
+public class 스카이라인쉬운거 {
+
     static int N, x, y;
     public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(System.in);
