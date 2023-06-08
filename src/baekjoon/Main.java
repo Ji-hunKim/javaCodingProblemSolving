@@ -3,37 +3,31 @@ package baekjoon;
 import java.util.*;
 
 public class Main {
-    static int N, x, y;
-    public static void main(String[] args) throws Exception{
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scann = new Scanner(System.in);
+        int N = scann.nextInt();
+        long[][] arr = new long[N][2];
+        long sum=0;
+        long cnt=0;
+        for(int i=0;i<N;i++) {
+            arr[i][0] = scann.nextLong();
+            arr[i][1] = scann.nextLong();
 
-        N = sc.nextInt();
-        int[] arr = new int[50002];
-        int answer = 0;
-
-        for(int i = 0; i < N; i++){
-            x = sc.nextInt();
-            y = sc.nextInt();
-            arr[i] = y;
+            cnt+=arr[i][1];
         }
-
-        int cur;
-
-        Stack<Integer> stk = new Stack<Integer>();
-        for(int i = 0; i <= N; i++){
-            cur = arr[i];
-
-            while(!stk.empty() && stk.peek() > cur){
-                answer += 1;
-                stk.pop();
+        Arrays.sort(arr, new Comparator<long[]>() {
+            @Override
+            public int compare(long[] n1, long[] n2) {
+                if(n1[0]==n2[0]) return (int)(n1[1]-n2[1]);
+                return (int)(n1[0]-n2[0]);
             }
-
-            if(!stk.empty() && stk.peek() == cur)
-                continue;
-
-            stk.push(cur);
+        });
+        for(int i=0;i<N;i++) {
+            sum+=arr[i][1];
+            if(sum>=(cnt+1)/2) {
+                System.out.println(arr[i][0]);
+                break;
+            }
         }
-
-        System.out.println(answer);
     }
 }
