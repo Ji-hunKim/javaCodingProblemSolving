@@ -1,8 +1,12 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
-public class Main {
+public class 파일합치기3 {
+
     static int N;
     static int K;
 
