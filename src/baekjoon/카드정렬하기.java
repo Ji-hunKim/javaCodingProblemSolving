@@ -4,6 +4,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class 카드정렬하기 {
+
     static int N;
 
     public static void main(String[] args) {

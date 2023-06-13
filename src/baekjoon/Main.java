@@ -1,36 +1,48 @@
 package baekjoon;
 
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.StringTokenizer;
 
 public class Main {
-    static int N;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        PriorityQueue<Long> queue = new PriorityQueue<>();
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
 
-        long a;
-        long b;
-        long answer;
-        long sum;
+        String input = br.readLine();
 
-        answer = 0;
-
-        for(int j=0; j<N; j++){
-            queue.offer(sc.nextLong());
+        char[] arr = input.toCharArray();
+        Deque<Character> dq = new ArrayDeque<>();
+        for (int i = 0; i < arr.length; i++) {
+            // 데크의 맨 뒤의 값이 arr[i]보다 작으면 삭제한다.
+            // 아래 조건을 만족할 때까지 반복.
+            while (K > 0 && !dq.isEmpty() && dq.getLast() < arr[i]) {
+                dq.removeLast();
+                K--;
+            }
+            dq.addLast(arr[i]);
         }
 
-        while(queue.size() > 1){
-            a = queue.poll();
-            b = queue.poll();
-
-            sum = a+b;
-            answer += sum;
-            queue.offer(sum);
+        StringBuilder ans = new StringBuilder();
+        // 위 for문에서 K가 0이 되기 전에 끝난 경우를 대비하여
+        // dq.size() - K만큼만 출력한다.
+        while (dq.size() > K) {
+            ans.append(dq.removeFirst());
         }
 
-        System.out.println(answer);
+        bw.write(ans.toString() + "\n");
+        bw.flush();
+        bw.close();
+        br.close();
     }
+
 }
