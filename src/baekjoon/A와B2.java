@@ -1,7 +1,9 @@
 package baekjoon;
 
-import java.util.*;
-public class Main {
+import java.util.Scanner;
+
+public class A와B2 {
+
     static int K;
     static String S, T;
     static int result;
