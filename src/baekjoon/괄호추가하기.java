@@ -1,8 +1,9 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Main {
+public class 괄호추가하기 {
     static int ans;
     static ArrayList<Character> ops;
     static ArrayList<Integer> nums;
