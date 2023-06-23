@@ -1,8 +1,9 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
+public class 컴백홈 {
+
     static int R,C,K;
     static String temp;
     static int[][] map;
