@@ -1,8 +1,8 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
+public class 적록색약 {
     static int N;
     static char[][] map;
     static boolean[][] visited;

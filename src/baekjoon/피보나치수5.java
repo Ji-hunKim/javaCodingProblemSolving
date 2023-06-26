@@ -21,7 +21,7 @@ class Main13 {
             }
 
             System.out.println(dp[num]);
-        }
+        }a
 
     }
 }
