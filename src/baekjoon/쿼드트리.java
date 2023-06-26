@@ -1,8 +1,8 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
+public class 쿼드트리 {
 
     public static int[][] img;		// 흑백 이미지
     public static StringBuilder sb = new StringBuilder();
