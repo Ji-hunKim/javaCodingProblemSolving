@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class 숫자고르기 {
 
     static ArrayList<Integer> list;
     static boolean[] visited;
@@ -29,13 +29,13 @@ public class Main {
 
         Collections.sort(list); //작은 수 부터 출력하므로 정렬한다.
         System.out.println(list.size());
-        for (Integer integer : list) {
-            System.out.println(integer);
+        for(int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
         }
     }
 
     public static void dfs(int start, int target) {
-        if(!visited[num[start]]) {
+        if(visited[num[start]] == false) {
             visited[num[start]] = true;
             dfs(num[start], target);
             visited[num[start]] = false;

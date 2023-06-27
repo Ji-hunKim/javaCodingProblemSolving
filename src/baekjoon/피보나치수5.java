@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-class Main13 {
+class 피보나치수5 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -21,7 +21,7 @@ class Main13 {
             }
 
             System.out.println(dp[num]);
-        }a
+        }
 
     }
 }
