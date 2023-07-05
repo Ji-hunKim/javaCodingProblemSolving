@@ -1,9 +1,8 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
-
+public class 알파벳 {
     static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static boolean[] visited;
     static char[][] map;
