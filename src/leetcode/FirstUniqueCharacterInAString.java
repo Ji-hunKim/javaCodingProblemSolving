@@ -23,7 +23,7 @@ class Solution {
         for (char c : map.keySet()) {
             if (alph[c - 'a'] == 1) {
                 int idx = map.get(c);
-                if (minIdx > idx) minIdx = idx;
+                minIdx = Math.min(minIdx, idx);
             }
         }
         return minIdx == s.length() ? -1 : minIdx;
