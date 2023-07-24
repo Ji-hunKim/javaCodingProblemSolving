@@ -31,7 +31,7 @@ class Solution {
                 if(!visited[i][j] && maps[i][j] == 1){
                     temp = 0;
                     dfs(i,j);
-                    if(temp > maxVal) maxVal = temp;
+                    maxVal = Math.max(maxVal, temp);
                 }
 
             }
