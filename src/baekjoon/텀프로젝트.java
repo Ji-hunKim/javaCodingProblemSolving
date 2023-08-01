@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class 텀프로젝트 {
     static int[] students; // 학생 배열
     static int[] check; // 몇 번째로 방문하는 것인지
     static int[] startV; // 시작 정점
