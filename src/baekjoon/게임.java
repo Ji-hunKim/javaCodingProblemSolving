@@ -1,8 +1,9 @@
 package baekjoon;
 
+
 import java.util.*;
 
-public class Main {
+public class 게임 {
     static int N, M;
     static int[][] map;
     static boolean[][] visit;
