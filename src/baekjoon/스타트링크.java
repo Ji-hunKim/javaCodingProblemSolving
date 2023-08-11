@@ -1,6 +1,11 @@
-import java.util.*;
+package baekjoon;
 
-public class Main {
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class 스타트링크 {
+
 
     static int f, s, g, u, d;
     static boolean[] visited;
