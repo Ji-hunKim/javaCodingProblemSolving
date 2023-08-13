@@ -1,8 +1,10 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
-public class Main {
+public class 토마토 {
 
     static int N,M;
     static int[][] map;
