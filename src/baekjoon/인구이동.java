@@ -1,9 +1,11 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
-public class Main {
-
+public class 인구이동 {
     static int n, l, r;
     static int[][] board;
     static boolean[][] visited;
