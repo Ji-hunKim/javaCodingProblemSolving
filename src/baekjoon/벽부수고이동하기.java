@@ -46,13 +46,13 @@ public class 벽부수고이동하기 {
 
                 if (nx >= 0 && nx < n && ny >= 0 && ny < m) {
                     if(board[nx][ny] == 0) { //벽이 아닐 때
-                        if (visited[nx][ny][current.wall] == false) { //현재까지 온 방법(벽을 부쉈는지 아닌지)으로 방문한 적이 없다면 방문한다.
+                        if (!visited[nx][ny][current.wall]) { //현재까지 온 방법(벽을 부쉈는지 아닌지)으로 방문한 적이 없다면 방문한다.
                             q.add(new Node(nx, ny, current.count + 1, current.wall));
                             visited[nx][ny][current.wall] = true;
                         }
                     }
                     else if (board[nx][ny] == 1) { //벽일때
-                        if (current.wall == 0 && visited[nx][ny][1] == false) { //현재까지 벽을 부순적이 없고, 벽을 부숴서 방문한 적이 없다면 방문한다.
+                        if (current.wall == 0 && !visited[nx][ny][1]) { //현재까지 벽을 부순적이 없고, 벽을 부숴서 방문한 적이 없다면 방문한다.
                             q.add(new Node(nx, ny, current.count + 1, 1));
                             visited[nx][ny][1] = true;
                         }
