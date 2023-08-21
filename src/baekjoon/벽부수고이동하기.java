@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class 벽부수고이동하기 {
 
     static int[] dx = { 1, 0, -1, 0 };
     static int[] dy = { 0, 1, 0, -1 };
