@@ -2,7 +2,7 @@ package baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class 불 {
 
     static int w, h;
     static char map[][];
