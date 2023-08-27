@@ -1,8 +1,10 @@
 package baekjoon;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
-class Main {
+public class 예산 {
+
     private static int[] arr; // 지방 예산
     private static long answer = 0;
 
