@@ -1,9 +1,11 @@
 package baekjoon;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-public class Main {
+public class 용돈관리 {
     public static int n,m;
     public static int arr[];
     public static void main(String args[]) throws NumberFormatException, IOException {
