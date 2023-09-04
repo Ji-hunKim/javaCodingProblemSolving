@@ -17,8 +17,7 @@ public class Main {
 
         int arr[] = new int[K];
         for (int i = 0; i < K; i++) {
-            st = new StringTokenizer(br.readLine());
-            int number = Integer.parseInt(st.nextToken());
+            int number = Integer.parseInt(br.readLine());
             arr[i] = number;
             if(number>max){
                 max = number;
