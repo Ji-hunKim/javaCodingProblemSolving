@@ -26,7 +26,8 @@ public class 아기상어2 {
             for (int j = 0; j < m; j++) {
                 map[i][j]=sc.nextInt();
                 if(map[i][j]==1) {
-                    q.add(new Shark(i,j));
+                    q.add(
+                            new Shark(i,j));
                 }
             }
         }

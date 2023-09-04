@@ -4,47 +4,48 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static int n,m;
-    public static int arr[];
-    public static void main(String args[]) throws NumberFormatException, IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        n=Integer.parseInt(st.nextToken());
-        m=Integer.parseInt(st.nextToken());
 
-        arr=new int[n];
-        int start=0;
-        int end=0;
-
-        for(int i=0;i<n;i++){
-            arr[i]=Integer.parseInt(br.readLine());
-            end+=arr[i];
-            if(start<arr[i]){
-                start=arr[i];
+        int K = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        long max=0;
+        long mid=0;
+        long min=0;
+        int l[] = new int[K];
+        for (int i = 0; i < K; i++) {
+            st = new StringTokenizer(br.readLine());
+            int number = Integer.parseInt(st.nextToken());
+            l[i] = number;
+            if(number>max){
+                max = number;
             }
         }
-
-        while(start<=end){
-            int mid=(start+end)/2;
-            int sum=0;
-            int cnt=0;
-
-            for(int i=0;i<n;i++){
-                if(sum+arr[i]>mid){
-                    cnt++;
-                    sum=0;
-                }
-                sum+=arr[i]; //집어넣고 다시 k원 인출 가능
+        max++; //+1을 더 해서 시작
+        long n;
+        while(min<max){
+            n=0;
+            mid = (min + max) / 2;
+            //mid의 랜선의 길이면 필요한 개수 N이 맞는지 검사
+            for(int i=0; i<K; i++){
+                n += (l[i]/mid);
             }
-            if(sum!=0){
-                cnt++;
+
+            /*  [upper bound 형식]
+             *
+             *  mid길이로 잘랐을 때의 개수가 만들고자 하는 랜선의 개수보다 작다면
+             *  자르고자 하는 길이를 줄이기 위해 최대 길이를 줄인다.
+             *  그 외에는 자르고자 하는 길이를 늘려야 하므로 최소 길이를 늘린다.
+             */
+
+            if(n<N){ // 랜선 개수가 모자라면 max값을 줄임
+                max = mid;
             }
-            if(cnt>m){
-                start=mid+1;
-            }else{
-                end=mid-1;
+            else{
+                min = mid +1;
             }
         }
-        System.out.println(start);
+        System.out.print(min-1);
     }
 }
