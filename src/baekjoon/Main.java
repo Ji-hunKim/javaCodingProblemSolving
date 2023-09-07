@@ -6,6 +6,7 @@ import java.io.*;
 public class Main {
 
     public static int[] house;
+    // test
 
     public static void main(String[] args) throws IOException {
 
