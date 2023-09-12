@@ -1,14 +1,15 @@
 package baekjoon;
 
+import java.io.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.math.BigDecimal;
-import java.util.*;
-import java.io.*;
 
-public class Main {
+public class 수학숙제 {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String str = "";
