@@ -1,9 +1,10 @@
 package baekjoon;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class Main {
+public class 비슷한단어 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
@@ -41,5 +42,5 @@ public class Main {
         }
         System.out.println(result);
 
-        }
+    }
 }
