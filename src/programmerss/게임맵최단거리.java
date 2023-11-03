@@ -4,54 +4,60 @@ import java.util.*;
 
 class Solution {
 
-  // 상하좌우 이동할 수 있는 좌표
-  int[] dx = {0, 1, -1, 0};
-  int[] dy = {1, 0, 0, -1};
+  int[] dx = {0,0,1,-1};
+  int[] dy = {1,-1,0,0};
+
+  int[][] visited;
+
+  int N,M;
+
+  int answer = 0;
 
   public int solution(int[][] maps) {
 
-    int answer = 0;
+    N = maps.length;
+    M = maps[0].length;
 
-    int[][] visited = new int[maps.length][maps[0].length];
+    visited = new int[N][M];
 
-    bfs(maps, visited);
-    answer = visited[maps.length - 1][maps[0].length - 1]; // 상대 팀 진영 좌표
+    Queue<Node> queue = new LinkedList<>();
 
-    if (answer == 0) { // 상대 팀 진영에 도달하지 못한 경우
-      answer = -1;
+    queue.offer(new Node(0,0,1));
+    visited[0][0] = 1;
+
+    while(!queue.isEmpty()){
+      Node now = queue.poll();
+
+      for(int i=0; i<4; i++){
+        int nx = now.x + dx[i];
+        int ny = now.y + dy[i];
+
+        if(nx <0 || ny <0 || nx>=N || ny>=M) continue;
+
+        if(visited[nx][ny] != 0) continue;
+
+        if(maps[nx][ny] == 0) continue;
+
+        queue.offer(new Node(nx,ny,now.val+1));
+        visited[nx][ny] = now.val+1;
+      }
     }
+
+    if(visited[N-1][M-1] == 0) answer = -1;
+    else answer = visited[N-1][M-1];
 
     return answer;
   }
 
-  public void bfs(int[][] maps, int[][] visited) {
+  public class Node {
+    int x;
+    int y;
+    int val;
 
-    Queue<int[]> q = new LinkedList<>();
-    q.add(new int[]{0, 0}); // Queue에 시작 정점 추가
-    visited[0][0] = 1;
-
-    while (!q.isEmpty()) { // 더 나아갈 정점이 없을 때까지 반복
-
-      int[] current = q.poll(); // 정점 하나 꺼내기
-      int X = current[0];
-      int Y = current[1];
-
-      for (int i = 0; i < 4; i++) {
-
-        int nX = X + dx[i];
-        int nY = Y + dy[i];
-
-        // 좌표가 maps에서 벗어날 경우 다음 반복으로 넘어간다
-        if (nX < 0 || nX > maps.length - 1 || nY < 0 || nY > maps[0].length - 1) {
-          continue;
-        }
-
-        // 아직 방문하지 않았고, 벽이 아닐 경우
-        if (visited[nX][nY] == 0 && maps[nX][nY] == 1) {
-          visited[nX][nY] = visited[X][Y] + 1;
-          q.add(new int[]{nX, nY});
-        }
-      }
+    public Node(int x, int y, int val) {
+      this.x = x;
+      this.y = y;
+      this.val = val;
     }
   }
-}
+}}
