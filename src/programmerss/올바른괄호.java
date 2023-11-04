@@ -4,26 +4,28 @@ import java.util.*;
 
 class Solution {
   boolean solution(String s) {
+
     boolean answer = true;
-    Stack<Character> stack = new Stack<>();
+    Stack<Character> stk = new Stack<>();
 
-    for(int i = 0; i < s.length(); i++){
-      char c = s.charAt(i);
+    stk.push(s.charAt(0));
 
-      //여는 괄호일 때
-      if(c == '('){
-        stack.push(c);
-      }
+    for(int i=1; i<s.length(); i++){
+      char now = s.charAt(i);
 
-      //닫는 괄호일 때
-      if(c == ')'){
-        if(stack.size() == 0){
-          return false;
+      if(now == '('){
+        stk.push(now);
+      }else{
+        if(stk.size() == 0) {
+          answer = false;
+          break;
+        }else{
+          stk.pop();
         }
-        else stack.pop();
       }
     }
-    if(stack.size() != 0) answer = false;
+
+    if(stk.size() > 0) answer = false;
 
     return answer;
   }
