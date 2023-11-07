@@ -1,41 +1,38 @@
 package baekjoon;
 
 import java.util.*;
+import java.io.*;
 
-class Main13 {
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int[] height = new int[9];
-        int sum = 0;
-        int h = 0;
+public class 일곱난쟁이 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int[] kids = new int[9];
+        int sum = -100;
 
         for(int i=0; i<9; i++){
-            h = sc.nextInt();
-            height[i] = h;
-            sum += h;
+            int now = Integer.parseInt(br.readLine());
+            kids[i] = now;
+            sum += now;
         }
-
         int a = 0;
         int b = 0;
 
-        Arrays.sort(height);
+        Arrays.sort(kids);
 
-        Loop1:
         for(int i=0; i<8; i++){
-            for(int j=i+1; j<9; j++){
-                if(sum - height[i] - height[j] == 100){
+            for(int j=1; j<9; j++){
+                if(i==j) continue;
+                if(kids[i]+kids[j] == sum){
                     a = i;
                     b = j;
-                    break Loop1;
                 }
             }
         }
 
         for(int i=0; i<9; i++){
-            if(i != a && i != b){
-                System.out.println(height[i]);
-            }
+            if(i == a || i == b) continue;
+            System.out.println(kids[i]);
         }
+
     }
 }

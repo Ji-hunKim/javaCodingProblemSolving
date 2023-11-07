@@ -6,40 +6,33 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        String first = br.readLine();
-        int result = 0;
+        int[] kids = new int[9];
+        int sum = -100;
 
-        for(int i = 0; i < N - 1; i++) {
-            String str = br.readLine();
-            int cnt = 0;    // 같은 단어 개수
-            int[] word = new int[26];
-            for(int j = 0; j < first.length(); j++) {
-                word[first.charAt(j) - 'A']++;
-            }
+        for(int i=0; i<9; i++){
+            int now = Integer.parseInt(br.readLine());
+            kids[i] = now;
+            sum += now;
+        }
+        int a = 0;
+        int b = 0;
 
-            for(int j = 0; j < str.length(); j++) {
-                if(word[str.charAt(j) - 'A'] > 0) {
-                    cnt++;
-                    word[str.charAt(j) - 'A']--;
+        Arrays.sort(kids);
+
+        for(int i=0; i<8; i++){
+            for(int j=1; j<9; j++){
+                if(i==j) continue;
+                if(kids[i]+kids[j] == sum){
+                    a = i;
+                    b = j;
                 }
             }
-            // 기준 문자열 길이와 비교 문자열 길이 차이
-            // 같은 경우 or 한 글자만 바뀐경우
-            if(first.length() == str.length() && (first.length() == cnt || first.length() - 1 == cnt)) {
-                result++;
-            }
-            // 비교 문자열이 짧은 경우 (제거)
-            else if (first.length() == str.length() - 1 && str.length() - 1 == cnt) {
-                result++;
-            }
-            // 비교 문자열이 긴 경우 (추가)
-            else if (first.length() == str.length() + 1 && str.length() == cnt) {
-                result++;
-            }
-
         }
-        System.out.println(result);
+
+        for(int i=0; i<9; i++){
+            if(i == a || i == b) continue;
+            System.out.println(kids[i]);
+        }
 
         }
 }
