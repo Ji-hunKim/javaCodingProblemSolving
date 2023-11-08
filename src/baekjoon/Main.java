@@ -4,35 +4,37 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int[] kids = new int[9];
-        int sum = -100;
+    public static void main(String[] args) throws IOException  {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = bf.readLine().split(" ");
+        int a = Integer.parseInt(input[0]);
+        int b = Integer.parseInt(input[1]);
 
-        for(int i=0; i<9; i++){
-            int now = Integer.parseInt(br.readLine());
-            kids[i] = now;
-            sum += now;
+        int A = 0;
+        int B = 0;
+
+        if(a == b){
+            System.out.println(a);
+            System.out.println(b);
+            System.exit(0);
         }
-        int a = 0;
-        int b = 0;
 
-        Arrays.sort(kids);
+        int k = Math.max(a,b)/2;
 
-        for(int i=0; i<8; i++){
-            for(int j=1; j<9; j++){
-                if(i==j) continue;
-                if(kids[i]+kids[j] == sum){
-                    a = i;
-                    b = j;
-                }
+        boolean flag = false;
+
+        while(k>0){
+            if(a%k == 0 && b%k == 0){
+                flag = true;
+                A = k;
+                B = k*(a/k)*(b/k);
+                break;
             }
+            k--;
         }
 
-        for(int i=0; i<9; i++){
-            if(i == a || i == b) continue;
-            System.out.println(kids[i]);
-        }
+        System.out.println(A);
+        System.out.println(B);
 
-        }
+    }
 }
