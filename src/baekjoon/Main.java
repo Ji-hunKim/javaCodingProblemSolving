@@ -6,35 +6,46 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException  {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        String[] input = bf.readLine().split(" ");
-        int a = Integer.parseInt(input[0]);
-        int b = Integer.parseInt(input[1]);
+        String in = bf.readLine();
 
-        int A = 0;
-        int B = 0;
-
-        if(a == b){
-            System.out.println(a);
-            System.out.println(b);
-            System.exit(0);
-        }
-
-        int k = Math.max(a,b)/2;
+        Stack<Character> stack = new Stack<>();
 
         boolean flag = false;
 
-        while(k>0){
-            if(a%k == 0 && b%k == 0){
-                flag = true;
-                A = k;
-                B = k*(a/k)*(b/k);
-                break;
-            }
-            k--;
-        }
+        int mul = 1;
+        int result = 0;
 
-        System.out.println(A);
-        System.out.println(B);
+        for(int i=0; i<in.length(); i++)
+            switch (in.charAt(i)) {
+                case '(':
+                    stack.push('(');
+                    mul *= 2;
+                    break;
+                case '[':
+                    stack.push('[');
+                    mul *= 3;
+                    break;
+                case ')':
+                    if (stack.isEmpty() || stack.peek() != '(') {
+                        result = 0;
+                        break;
+                    }
+                    if (in.charAt(i - 1) == '(') result += mul;
+                    stack.pop();
+                    mul /= 2;
+                    break;
+                case ']':
+                    if (stack.isEmpty() || stack.peek() != '[') {
+                        result = 0;
+                        break;
+                    }
+                    if (in.charAt(i - 1) == '[') result += mul;
+                    stack.pop();
+                    mul /= 3;
+                    break;
+            }
+
+
 
     }
 }
