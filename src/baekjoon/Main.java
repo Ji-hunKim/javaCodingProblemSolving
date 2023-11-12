@@ -14,6 +14,7 @@ public class Main {
 
         int mul = 1;
         int result = 0;
+        //
 
         for(int i=0; i<in.length(); i++)
             switch (in.charAt(i)) {
