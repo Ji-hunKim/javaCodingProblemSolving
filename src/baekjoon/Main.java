@@ -6,45 +6,51 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException  {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        String in = bf.readLine();
+        StringTokenizer stz = new StringTokenizer(bf.readLine(), " ");
 
-        Stack<Character> stack = new Stack<>();
+        int a = Integer.parseInt(stz.nextToken());
+        int b = Integer.parseInt(stz.nextToken());
 
-        boolean flag = false;
+        int left = 0;
+        int right = b-1;
 
-        int mul = 1;
-        int result = 0;
-        //
+        stz = new StringTokenizer(bf.readLine(), " ");
 
-        for(int i=0; i<in.length(); i++)
-            switch (in.charAt(i)) {
-                case '(':
-                    stack.push('(');
-                    mul *= 2;
-                    break;
-                case '[':
-                    stack.push('[');
-                    mul *= 3;
-                    break;
-                case ')':
-                    if (stack.isEmpty() || stack.peek() != '(') {
-                        result = 0;
-                        break;
-                    }
-                    if (in.charAt(i - 1) == '(') result += mul;
-                    stack.pop();
-                    mul /= 2;
-                    break;
-                case ']':
-                    if (stack.isEmpty() || stack.peek() != '[') {
-                        result = 0;
-                        break;
-                    }
-                    if (in.charAt(i - 1) == '[') result += mul;
-                    stack.pop();
-                    mul /= 3;
-                    break;
+        int[] stick = new int[b];
+        int i=0;
+
+        while(stz.hasMoreTokens()){
+            stick[i] = Integer.parseInt(stz.nextToken());
+            i++;
+        }
+
+
+        int leftVal = stick[left];
+        int rightVal = stick[right];
+
+        int answer = 0;
+
+        while(left<right){
+
+            if(leftVal > rightVal){
+                right--;
+                if(stick[right] < rightVal){
+                    answer += rightVal - stick[right];
+                }else{
+                    rightVal = stick[right];
+                }
+            }else{
+                left++;
+                if(stick[left] < leftVal){
+                    answer += leftVal - stick[left];
+                }else{
+                    leftVal = stick[left];
+                }
             }
+        }
+
+        System.out.println(answer);
+
 
     }
 }
