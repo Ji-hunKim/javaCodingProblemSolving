@@ -1,56 +1,106 @@
 package baekjoon;
 
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException  {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer stz = new StringTokenizer(bf.readLine(), " ");
+    static int N;
+    static String[][] map;
+    static int answer = 0;
 
-        int a = Integer.parseInt(stz.nextToken());
-        int b = Integer.parseInt(stz.nextToken());
+    static int maxVal = 0;
 
-        int left = 0;
-        int right = b-1;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        stz = new StringTokenizer(bf.readLine(), " ");
+        N = sc.nextInt();
 
-        int[] stick = new int[b];
-        int i=0;
+        map = new String[N][N];
 
-        while(stz.hasMoreTokens()){
-            stick[i] = Integer.parseInt(stz.nextToken());
-            i++;
+        for (int i = 0; i < N; i++) {
+            map[i] = sc.next().split("");
         }
 
+        String temp = "";
+        int cnt = 0;
+        String cur = "";
 
-        int leftVal = stick[left];
-        int rightVal = stick[right];
-
-        int answer = 0;
-
-        while(left<right){
-
-            if(leftVal > rightVal){
-                right--;
-                if(stick[right] < rightVal){
-                    answer += rightVal - stick[right];
-                }else{
-                    rightVal = stick[right];
+        //가로
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N - 1; j++) {
+                temp = map[i][j];
+                map[i][j] = map[i][j + 1];
+                map[i][j + 1] = temp;
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[a][0];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[a][b])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[a][b];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
                 }
-            }else{
-                left++;
-                if(stick[left] < leftVal){
-                    answer += leftVal - stick[left];
-                }else{
-                    leftVal = stick[left];
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[0][a];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[b][a])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[b][a];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
                 }
+                map[i][j + 1] = map[i][j];
+                map[i][j] = temp;
             }
         }
 
-        System.out.println(answer);
-
-
+        //세로
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N - 1; j++) {
+                temp = map[j][i];
+                map[j][i] = map[j + 1][i];
+                map[j + 1][i] = temp;
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[a][0];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[a][b])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[a][b];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
+                }
+                for (int a = 0; a < N; a++) {
+                    cnt = 0;
+                    cur = map[0][a];
+                    for (int b = 0; b < N; b++) {
+                        if (cur.equals(map[b][a])) {
+                            cnt++;
+                            maxVal = Math.max(maxVal, cnt);
+                        } else {
+                            cur = map[b][a];
+                            maxVal = Math.max(maxVal, cnt);
+                            cnt = 1;
+                        }
+                    }
+                }
+                map[j + 1][i] = map[j][i];
+                map[j][i] = temp;
+            }
+        }
+        System.out.println(maxVal);
     }
 }
