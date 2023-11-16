@@ -1,60 +1,76 @@
 package baekjoon;
 
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class 연산자끼워넣기 {
-
-    static int maxVal = Integer.MIN_VALUE;
+    static int N;
+    static int[] num;
+    static int maxVal = -Integer.MAX_VALUE;
     static int minVal = Integer.MAX_VALUE;
-    static int[] nums;
-    static int[] cal = new int[4];
-    static int n;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        nums = new int[n];
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(bf.readLine());
+        StringTokenizer stk = new StringTokenizer(bf.readLine(), " ");
 
-        for(int i=0; i<n; i++){
-            nums[i] = sc.nextInt();
+        num = new int[N];
+        int[] calc = new int[4];
+
+        for(int i=0; i<N; i++){
+            num[i] = Integer.parseInt(stk.nextToken());
         }
+
+        stk = new StringTokenizer(bf.readLine(), " ");
 
         for(int i=0; i<4; i++){
-            cal[i] = sc.nextInt();
+            calc[i] = Integer.parseInt(stk.nextToken());
         }
 
-        dfs(1, nums[0]);
+
+        calculator(1, num[0], calc);
 
         System.out.println(maxVal);
         System.out.println(minVal);
     }
 
-    public static void dfs(int idx, int val){
-        if(idx >= n) {
-            maxVal = Math.max(maxVal, val);
-            minVal = Math.min(minVal, val);
+    public static void calculator(int k, int total, int[] arr){
+        if(k == N){
+            maxVal = Math.max(maxVal, total);
+            minVal = Math.min(minVal, total);
             return;
-        }else{
-            for(int i=0; i<4; i++){
-                if(cal[i] != 0){
-                    cal[i]--;
-                    switch(i){
-                        case 0:
-                            dfs(idx+1, val+nums[idx]);
-                            break;
-                        case 1:
-                            dfs(idx+1, val-nums[idx]);
-                            break;
-                        case 2:
-                            dfs(idx+1, val*nums[idx]);
-                            break;
-                        case 3:
-                            dfs(idx+1, val/nums[idx]);
-                            break;
-                    }
-                    cal[i]++;
-                }
-            }
         }
+
+        // +
+        if(arr[0] > 0){
+            arr[0] -= 1;
+            calculator(k+1, total + num[k], arr);
+            arr[0] += 1;
+        }
+
+        // -
+        if(arr[1] > 0){
+            arr[1] -= 1;
+            calculator(k+1, total - num[k], arr);
+            arr[1] += 1;
+        }
+
+        // *
+        if(arr[2] > 0){
+            arr[2] -= 1;
+            calculator(k+1, total * num[k], arr);
+            arr[2] += 1;
+        }
+
+        // /
+        if(arr[3] > 0){
+            arr[3] -= 1;
+            calculator(k+1, total / num[k], arr);
+            arr[3] += 1;
+        }
+
     }
 }
