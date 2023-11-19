@@ -21,10 +21,6 @@ public class Main {
 
         coins = new int[N];
 
-        for(int i=0; i<N; i++){
-            coins[i] = sc.nextInt();
-        }
-
         dp = new int[sum+1];
         dp[0] = 1;
 
