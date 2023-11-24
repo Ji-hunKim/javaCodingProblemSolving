@@ -3,99 +3,68 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-
+import java.util.*;
 
 public class Main {
+    static int[][] map;
+    static boolean[][] visited;
     static int N;
-    static int sum;
-    static int[] coins;
-    static int[] dp;
-
-    public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-
-        N = sc.nextInt();
-        sum = sc.nextInt();
-
-        coins = new int[N];
-
-        dp = new int[sum+1];
-        dp[0] = 1;
-
-        System.out.println(dp[sum]);
-
-    }
-}
-
-
-
-public class Main {
-    static int N;
-    static int[] num;
-    static int maxVal = -Integer.MAX_VALUE;
-    static int minVal = Integer.MAX_VALUE;
+    static int[] dx = {0,0,1,-1};
+    static int[] dy = {1,-1,0,0,};
+    static int room;
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(bf.readLine());
-        StringTokenizer stk = new StringTokenizer(bf.readLine(), " ");
 
-        num = new int[N];
-        int[] calc = new int[4];
+        N = Integer.parseInt(bf.readLine());
+        map = new int[N][N];
+        visited = new boolean[N][N];
 
         for(int i=0; i<N; i++){
-            num[i] = Integer.parseInt(stk.nextToken());
+            String[] str = bf.readLine().split("");
+            for(int j=0; j<N; j++){
+                map[i][j] = Integer.parseInt(str[j]);
+            }
         }
 
-        stk = new StringTokenizer(bf.readLine(), " ");
+        List<Integer> li = new ArrayList<>();
+        int cnt = 0;
 
-        for(int i=0; i<4; i++){
-            calc[i] = Integer.parseInt(stk.nextToken());
+        for(int i=0; i<N; i++){
+            for(int j=0; j<N; j++){
+                if(!visited[i][j] && map[i][j] != 0){
+                    room = 0;
+                    dfs(i,j);
+                    cnt++;
+                    li.add(room);
+                }
+            }
         }
 
-
-        calculator(1, num[0], calc);
-
-        System.out.println(maxVal);
-        System.out.println(minVal);
+        Collections.sort(li);
+        System.out.println(cnt);
+        for(int i=0; i<li.size(); i++){
+            System.out.println(li.get(i));
+        }
     }
 
-    public static void calculator(int k, int total, int[] arr){
-        if(k == N){
-            maxVal = Math.max(maxVal, total);
-            minVal = Math.min(minVal, total);
-            return;
-        }
+    public static void dfs(int i, int j){
+        visited[i][j] = true;
+        room++;
 
-        // +
-        if(arr[0] > 0){
-            arr[0] -= 1;
-            calculator(k+1, total + num[k], arr);
-            arr[0] += 1;
-        }
+        for(int k=0; k<4; k++){
+            int nx = i+dx[k];
+            int ny = j+dy[k];
 
-        // -
-        if(arr[1] > 0){
-            arr[1] -= 1;
-            calculator(k+1, total - num[k], arr);
-            arr[1] += 1;
-        }
+            if(nx<0 || ny<0 || nx>=N || ny>=N) continue;
 
-        // *
-        if(arr[2] > 0){
-            arr[2] -= 1;
-            calculator(k+1, total * num[k], arr);
-            arr[2] += 1;
-        }
+            if(visited[nx][ny]) continue;
 
-        // /
-        if(arr[3] > 0){
-            arr[3] -= 1;
-            calculator(k+1, total / num[k], arr);
-            arr[3] += 1;
+            if(map[nx][ny] == 0) continue;
+
+            dfs(nx,ny);
         }
 
     }
+
 }
