@@ -7,62 +7,70 @@ import java.util.*;
 
 public class Main {
     static int[][] map;
-    static boolean[][] visited;
     static int N;
-    static int[] dx = {0,0,1,-1};
-    static int[] dy = {1,-1,0,0,};
-    static int room;
+    static int[] dx = {0,1,1};
+    static int[] dy = {1,1,0};
+    static int cnt = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
         N = Integer.parseInt(bf.readLine());
         map = new int[N][N];
-        visited = new boolean[N][N];
 
         for(int i=0; i<N; i++){
-            String[] str = bf.readLine().split("");
+            String[] str = bf.readLine().split(" ");
             for(int j=0; j<N; j++){
                 map[i][j] = Integer.parseInt(str[j]);
             }
         }
 
-        List<Integer> li = new ArrayList<>();
-        int cnt = 0;
+        dfs(0,1);
 
-        for(int i=0; i<N; i++){
-            for(int j=0; j<N; j++){
-                if(!visited[i][j] && map[i][j] != 0){
-                    room = 0;
-                    dfs(i,j);
-                    cnt++;
-                    li.add(room);
-                }
-            }
-        }
-
-        Collections.sort(li);
         System.out.println(cnt);
-        for(int i=0; i<li.size(); i++){
-            System.out.println(li.get(i));
-        }
     }
 
     public static void dfs(int i, int j){
-        visited[i][j] = true;
-        room++;
+        if(i == N-1 && j == N-1) {
+            cnt++;
+            return;
+        }
 
-        for(int k=0; k<4; k++){
-            int nx = i+dx[k];
-            int ny = j+dy[k];
+        for(int k=0; k<3; k++){
+            if(k == 0 || k == 2){
+                int nx = i+dx[k];
+                int ny = j+dy[k];
 
-            if(nx<0 || ny<0 || nx>=N || ny>=N) continue;
+                if(nx<0 || ny<0 || nx>=N || ny>=N) continue;
 
-            if(visited[nx][ny]) continue;
+                if(map[nx][ny] == 1) continue;
+                dfs(nx,ny);
+            }else{
+                boolean flag = false;
 
-            if(map[nx][ny] == 0) continue;
+                for(int p=0; p<3; p++){
+                    int nx = i+dx[p];
+                    int ny = j+dy[p];
 
-            dfs(nx,ny);
+                    if(nx<0 || ny<0 || nx>=N || ny>=N) {
+                        flag = true;
+                        break;
+                    }
+
+                    if(map[nx][ny] == 1) {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if(flag) continue;
+
+                int nx = i+dx[k];
+                int ny = i+dy[k];
+
+                dfs(nx,ny);
+            }
+
         }
 
     }
